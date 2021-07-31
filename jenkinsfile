@@ -1,0 +1,15 @@
+node('master') {
+    stage('clone') {
+    // some block
+    git credentialsId: 'jenkinsgit', url: 'git@gitlab.com:Windhashira/j2e_devops.git'
+    }
+    stage('test') {
+    sh 'mvn test'
+    }
+    stage('build') {
+    sh 'mvn install package'
+    }
+    stage('deploy') {
+    deploy adapters: [tomcat9(credentialsId: 'user_tomcat', path: '', url: 'htttp://193.70.0.50:8080')], contextPath: null, war: '**/*.war'
+    }
+}
