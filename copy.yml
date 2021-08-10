@@ -1,0 +1,9 @@
+---
+- name: copie fichier webapp
+  hosts: all
+  become: true
+  tasks:
+  - name: copy file
+    copy:
+      src: /home/ansadmin/copy.yaml
+      dest: /home/ansadmin/
