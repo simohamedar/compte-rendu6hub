@@ -1,0 +1,11 @@
+node {
+stage("git clone"){
+git 'git@github.com:simohamedar/compte-rendu6hub.git'
+} 
+stage("Maven Build"){
+sh "mvn clean install package"
+}
+stage("ansible"){
+ansiblePlaybook becomeUser: 'ansadmin', playbook: 'copy.yml'
+} 
+}
